@@ -1,3 +1,17 @@
-DMTabBar/DMTabBar.xcodeproj/project.xcworkspace/xcuserdata/mz2.xcuserdatad/UserInterfaceState.xcuserstate
-DMTabBar/DMTabBar.xcodeproj/xcuserdata/mz2.xcuserdatad/xcschemes/xcschememanagement.plist
-DMTabBar/DMTabBar.xcodeproj/xcuserdata/mz2.xcuserdatad/xcschemes/DMTabBar.xcscheme
+*.mode1v3
+*.pbxuser
+build
+/Citations/build
+/Citations/CitationsTests/build
+/Extras/MTSQLite-iPhone Test/build
+/Extras/memory_tests_copy
+*node_modules
+/Papers2.xcodeproj/mz2.mode1v3
+/Papers2.xcodeproj/mz2.pbxuser
+/Extras/Tender-Crashes/discussions
+project.xcworkspace
+xcuserdata
+.svn
+.DS_Store
+profile
+*GITIGNORE*
