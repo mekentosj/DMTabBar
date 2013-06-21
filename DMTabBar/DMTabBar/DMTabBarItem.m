@@ -3,135 +3,154 @@
 //  DMTabBar - XCode like Segmented Control
 //
 //  Created by Daniele Margutti on 6/18/12.
-//  Copyright (c) 2012 Daniele Margutti (http://www.danielemargutti.com - daniele.margutti@gmail.com). All rights reserved.
+//  Copyright (c) 2012 Daniele Margutti (http://www.danielemargutti.com - daniele.margutti@gmail.com).
+//  All rights reserved.
 //  Licensed under MIT License
-//
 
 #import "DMTabBarItem.h"
 
-static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
-
-#define kDMTabBarItemGradientColor1                         [NSColor colorWithCalibratedWhite:0.7f alpha:0.0f]
-#define kDMTabBarItemGradientColor2                         [NSColor colorWithCalibratedWhite:0.7f alpha:1.0f]
-#define kDMTabBarItemGradient                               [[NSGradient alloc] initWithColors: [NSArray arrayWithObjects: \
-                                                                                                         kDMTabBarItemGradientColor1, \
-                                                                                                         kDMTabBarItemGradientColor2, \
-                                                                                                         kDMTabBarItemGradientColor1, nil] \
-                                                                                   atLocations: kDMTabBarItemGradientColor_Locations \
-                                                                                    colorSpace: [NSColorSpace genericGrayColorSpace]]
-
-@interface DMTabBarButtonCell : NSButtonCell { }
+@interface DMTabBarButtonCell : NSButtonCell
 @end
 
-@interface DMTabBarItem() {
-    NSButton*       tabBarItemButton;
-}
+@interface DMTabBarItem()
+@property (strong) NSButton *tabBarItemButton;
 @end
 
 @implementation DMTabBarItem
 
-@synthesize enabled,icon,toolTip;
-@synthesize keyEquivalent,keyEquivalentModifierMask;
-@synthesize tag;
-@synthesize tabBarItemButton;
-@synthesize state;
-
-+ (DMTabBarItem *) tabBarItemWithIcon:(NSImage *) iconImage tag:(NSUInteger) itemTag {
++ (DMTabBarItem *)tabBarItemWithIcon:(NSImage *)iconImage tag:(NSUInteger)itemTag
+{
     return [[DMTabBarItem alloc] initWithIcon:iconImage tag:itemTag];
 }
 
-- (id)initWithIcon:(NSImage *) iconImage tag:(NSUInteger) itemTag {
-    self = [super init];
-    if (self) {
-        // Create associated NSButton to place inside the bar (it's customized by DMTabBarButtonCell with a special gradient for selected state)
-        tabBarItemButton = [[NSButton alloc] initWithFrame:NSZeroRect];
-        tabBarItemButton.cell = [[DMTabBarButtonCell alloc] init];
-        tabBarItemButton.image = iconImage;
-        [tabBarItemButton setEnabled:YES];
-        tabBarItemButton.tag = itemTag;
-        [tabBarItemButton sendActionOn:NSLeftMouseDownMask];
+- (id)initWithIcon:(NSImage *)iconImage tag:(NSUInteger)itemTag
+{
+    if (self = [super init])
+    {
+        // Create associated NSButton to place inside the bar
+        // (it's customized by DMTabBarButtonCell with a special gradient for selected state)
+        _tabBarItemButton = [[NSButton alloc] initWithFrame:NSZeroRect];
+        _tabBarItemButton.cell = [[DMTabBarButtonCell alloc] init];
+        _tabBarItemButton.image = iconImage;
+        _tabBarItemButton.enabled = YES;
+        _tabBarItemButton.tag = itemTag;
+        _tabBarItemButton.buttonType = NSToggleButton; // needed for on/off style buttons
+        [_tabBarItemButton sendActionOn:NSLeftMouseDownMask];
     }
     return self;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"[DMTabBarItem] tag=%i - title=%@", (int)self.tag,self.title];
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"[DMTabBarItem] tag=%i - title=%@", (int)self.tag, self.title];
 }
 
+
+#pragma mark -
 #pragma mark - Properties redirects
 
 // We simply redirects properties to the the NSButton class
 
-- (void) setIcon:(NSImage *)newIcon { 
-    tabBarItemButton.image = newIcon;   
+- (NSImage *)icon
+{
+    return _tabBarItemButton.image;
 }
 
-- (NSImage *) icon {   
-    return tabBarItemButton.image;  
+- (void)setIcon:(NSImage *)newIcon
+{
+    _tabBarItemButton.image = newIcon;
 }
 
-- (void) setTag:(NSUInteger)newTag {  
-    tabBarItemButton.tag = newTag; 
+- (NSImage *)alternateIcon
+{
+    return _tabBarItemButton.alternateImage;
 }
 
-- (NSUInteger) tag {  
-    return tabBarItemButton.tag;    
+- (void)setAlternateIcon:(NSImage *)newIcon
+{
+    _tabBarItemButton.alternateImage = newIcon;
 }
 
-- (void) setToolTip:(NSString *)newToolTip {   
-    tabBarItemButton.toolTip = newToolTip;  
+- (NSUInteger)tag
+{
+    return _tabBarItemButton.tag;
 }
 
-- (NSString *) toolTip {  
-    return tabBarItemButton.toolTip;    
+- (void)setTag:(NSUInteger)newTag
+{
+    _tabBarItemButton.tag = newTag;
 }
 
-- (void) setKeyEquivalentModifierMask:(NSUInteger)newKeyEquivalentModifierMask {
-    tabBarItemButton.keyEquivalentModifierMask = newKeyEquivalentModifierMask; 
+- (NSString *)toolTip
+{
+    return _tabBarItemButton.toolTip;
 }
 
-- (NSUInteger) keyEquivalentModifierMask {
-    return tabBarItemButton.keyEquivalentModifierMask; 
+- (void)setToolTip:(NSString *)newToolTip
+{
+    _tabBarItemButton.toolTip = newToolTip;
 }
 
-- (void) setKeyEquivalent:(NSString *)newKeyEquivalent {
-    tabBarItemButton.keyEquivalent = newKeyEquivalent;
+- (NSUInteger) keyEquivalentModifierMask
+{
+    return _tabBarItemButton.keyEquivalentModifierMask;
 }
 
-- (NSString *) keyEquivalent { 
-    return tabBarItemButton.keyEquivalent;  
+- (void)setKeyEquivalentModifierMask:(NSUInteger)newKeyEquivalentModifierMask
+{
+    _tabBarItemButton.keyEquivalentModifierMask = newKeyEquivalentModifierMask;
 }
 
-- (void) setState:(NSInteger)value {
-    tabBarItemButton.state = value;
+- (NSString *)keyEquivalent
+{
+    return _tabBarItemButton.keyEquivalent;
 }
 
-- (NSInteger) state {
-    return tabBarItemButton.state;
+- (void)setKeyEquivalent:(NSString *)newKeyEquivalent
+{
+    _tabBarItemButton.keyEquivalent = newKeyEquivalent;
+}
+
+- (NSInteger)state
+{
+    return _tabBarItemButton.state;
+}
+
+- (void)setState:(NSInteger)value
+{
+    _tabBarItemButton.state = value;
 }
 
 @end
 
 
-#pragma mark - DMTabBarButtonCell
+#pragma mark - 
+#pragma mark -
 
 @implementation DMTabBarButtonCell
 
-- (id)init {
-    self = [super init];
-    if (self) {
+- (id)init
+{
+    if (self = [super init])
+    {
         self.bezelStyle = NSTexturedRoundedBezelStyle;
     }
     return self;
 }
 
-- (NSInteger) nextState {
+- (NSInteger)nextState
+{
     return self.state;
 }
-
-- (void) drawBezelWithFrame:(NSRect)frame inView:(NSView *)controlView {
-    if (self.state == NSOnState) { 
-        // If selected we need to draw the border new background for selection (otherwise we will use default back color)
+ 
+- (void)drawBezelWithFrame:(NSRect)frame inView:(NSView *)controlView
+{
+    /* DISABLED XCode STYLE DRAWING
+     
+    if (self.state == NSOnState)
+    {
+        // If selected we need to draw the border new background for selection
+        // (otherwise we will use default back color)
         // Save current context
         [[NSGraphicsContext currentContext] saveGraphicsState];
         
@@ -168,5 +187,8 @@ static CGFloat kDMTabBarItemGradientColor_Locations[] =     {0.0f, 0.5f, 1.0f};
         // Restore context
         [[NSGraphicsContext currentContext] restoreGraphicsState];
     }
+     */
+
 }
+
 @end
