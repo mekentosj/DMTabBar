@@ -8,6 +8,7 @@
 //
 
 #import "DMTabBar.h"
+#import "MTExtensions.h"
 
 // Gradient applied to the background of the tabBar
 // (Colors and gradient from Stephan Michels Softwareentwicklung und Beratung - SMTabBar)
@@ -62,11 +63,15 @@
 
 - (void)setDefaultColors
 {
-    self.gradientColorStart = kDMTabBarGradientColor_Start;
-    self.gradientColorEnd = kDMTabBarGradientColor_End;
-    self.borderColor = kDMTabBarBorderColor;
+//    self.gradientColorStart = kDMTabBarGradientColor_Start;
+//    self.gradientColorEnd = kDMTabBarGradientColor_End;
+//    self.borderColor = kDMTabBarBorderColor;
+    self.drawTopShadow = YES;
+    self.drawUpperBorder = NO;
+    self.drawLowerBorder = YES;
 }
 
+/* We make use of MTGradientView instead
 - (void)drawRect:(NSRect)dirtyRect {
     
     // Draw bar gradient if its color is set
@@ -84,6 +89,7 @@
                                   toPoint:NSMakePoint(NSMaxX(self.bounds), NSMaxY(self.bounds))];
     }
 }
+*/
 
 - (BOOL) isFlipped {
     return YES;
