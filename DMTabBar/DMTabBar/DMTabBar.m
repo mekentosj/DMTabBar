@@ -175,7 +175,6 @@
         [self removeAllTabBarItems];
         _tabBarItems = newTabBarItems;
         
-        NSLog(@"Selected tab bar item: %@", self.selectedTabBarItem);
         NSUInteger selectedItemIndex = [self.tabBarItems indexOfObject:self.selectedTabBarItem];
         NSUInteger itemIndex = 0;
         [self.tabBarItems enumerateObjectsUsingBlock:^(DMTabBarItem *tabBarItem, NSUInteger idx, BOOL *stop)
