@@ -56,12 +56,6 @@
     self.drawTopShadow = (!RUNNING_ON_YOSEMITE_OR_HIGHER);
     self.drawGradient = (!RUNNING_ON_YOSEMITE_OR_HIGHER);
     
-    if (RUNNING_ON_YOSEMITE_OR_HIGHER)
-        self.drawBackground = NO;
-
-        //  in case we don't want the translucency exchange the above for:
-        //  self.backgroundColor = [NSColor colorWithDeviceWhite:0.96 alpha:1.0];
-
     self.drawUpperBorder = NO;
     self.drawLowerBorder = YES;
 }
