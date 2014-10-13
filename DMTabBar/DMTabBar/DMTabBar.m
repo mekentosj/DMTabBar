@@ -53,7 +53,9 @@
 
 - (void)setDefaultColors
 {
-    self.drawTopShadow = YES;
+    self.drawTopShadow = (!RUNNING_ON_YOSEMITE_OR_HIGHER);
+    self.drawGradient = (!RUNNING_ON_YOSEMITE_OR_HIGHER);
+    
     self.drawUpperBorder = NO;
     self.drawLowerBorder = YES;
 }
