@@ -71,12 +71,12 @@
     _tabBarItemButton.alternateImage = newIcon;
 }
 
-- (NSUInteger)tag
+- (NSInteger)tag
 {
     return _tabBarItemButton.tag;
 }
 
-- (void)setTag:(NSUInteger)newTag
+- (void)setTag:(NSInteger)newTag
 {
     _tabBarItemButton.tag = newTag;
 }
