@@ -11,13 +11,11 @@
 
 @interface DMTabBarItem : NSButtonCell
 
-@property (assign) BOOL enabled;                            
 @property (strong) NSImage *icon;
 @property (strong) NSImage *alternateIcon;
 @property (strong) NSString *toolTip;                       
 @property (copy) NSString *keyEquivalent;
 @property (assign) NSUInteger keyEquivalentModifierMask;    
-@property (assign) NSUInteger tag;                          
 @property (assign) NSInteger state;                         
 
 // Internal use
